@@ -26,7 +26,7 @@
     <Compile Include="blescan.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Report.py">
+    <Compile Include="iBeaconReport.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="testblescan.py">

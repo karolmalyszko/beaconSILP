@@ -20,7 +20,7 @@ import sys
 import struct
 import bluetooth._bluetooth as bluez
 import math
-import Report
+import iBeaconReport
 import datetime
 
 LE_META_EVENT = 0x3e
