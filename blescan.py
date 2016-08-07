@@ -176,6 +176,6 @@ def parse_events(sock, loop_count=100):
 
                 myFullList.append(Adstring)     #to be deleted
             done = True
-            print licznik
+    print licznik
     sock.setsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, old_filter )
     return myFullList       #to be changed to Report array
