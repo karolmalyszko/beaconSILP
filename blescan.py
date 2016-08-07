@@ -124,7 +124,7 @@ def parse_events(sock, loop_count=100):
             if subevent == EVT_LE_CONN_COMPLETE:
                 le_handle_connection_complete(pkt)
             elif subevent == EVT_LE_ADVERTISING_REPORT:
-                print "advertising report"
+                #print "advertising report"
                 num_reports = struct.unpack("B", pkt[0])[0]
                 report_pkt_offset = 0
 
