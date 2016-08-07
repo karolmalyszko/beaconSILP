@@ -83,23 +83,6 @@ def hci_disable_le_scan(sock):
     hci_toggle_le_scan(sock, 0x00)
 
 def hci_toggle_le_scan(sock, enable):
-# hci_le_set_scan_enable(dd, 0x01, filter_dup, 1000);
-# memset(&scan_cp, 0, sizeof(scan_cp));
- #uint8_t         enable;
- #       uint8_t         filter_dup;
-#        scan_cp.enable = enable;
-#        scan_cp.filter_dup = filter_dup;
-#
-#        memset(&rq, 0, sizeof(rq));
-#        rq.ogf = OGF_LE_CTL;
-#        rq.ocf = OCF_LE_SET_SCAN_ENABLE;
-#        rq.cparam = &scan_cp;
-#        rq.clen = LE_SET_SCAN_ENABLE_CP_SIZE;
-#        rq.rparam = &status;
-#        rq.rlen = 1;
-
-#        if (hci_send_req(dd, &rq, to) < 0)
-#                return -1;
     cmd_pkt = struct.pack("<BB", enable, 0x00)
     bluez.hci_send_cmd(sock, OGF_LE_CTL, OCF_LE_SET_SCAN_ENABLE, cmd_pkt)
 
@@ -110,8 +93,6 @@ def hci_le_set_scan_parameters(sock):
     SCAN_RANDOM = 0x01
     OWN_TYPE = SCAN_RANDOM
     SCAN_TYPE = 0x01
-
-
     
 def parse_events(sock, loop_count=100):
     old_filter = sock.getsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, 14)
@@ -143,22 +124,11 @@ def parse_events(sock, loop_count=100):
             if subevent == EVT_LE_CONN_COMPLETE:
                 le_handle_connection_complete(pkt)
             elif subevent == EVT_LE_ADVERTISING_REPORT:
-                #print "advertising report"
+                print "advertising report"
                 num_reports = struct.unpack("B", pkt[0])[0]
                 report_pkt_offset = 0
+
                 for i in range(0, num_reports):
-
-                    if (DEBUG == True):
-                        print "-------------"
-                        print "\tUDID: ", printpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6])
-                        print "\tMAJOR: ", printpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4])
-                        print "\tMINOR: ", printpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2])
-                        print "\tMAC address: ", packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
-                        txpower, = struct.unpack("b", pkt[report_pkt_offset -2])
-                        print "\t(Unknown):", txpower
-                        rssi, = struct.unpack("b", pkt[report_pkt_offset -1])
-                        print "\tRSSI:", rssi
-
                     macAddress = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
                     uid = returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6])
                     major = returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4])
