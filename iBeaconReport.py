@@ -1,4 +1,4 @@
-class iBeaconReport(object):
+class iBeaconReport:
     """Basic location report, designed to hold data from single iBeacon advertisement event"""
 
 
