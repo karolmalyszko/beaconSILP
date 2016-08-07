@@ -130,6 +130,7 @@ def parse_events(sock, loop_count=100):
                 num_reports = struct.unpack("B", pkt[0])[0]
                 report_pkt_offset = 0
 
+                licznik = 0
                 for i in range(0, num_reports):
                     macAddress = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
                     uid = returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6])
@@ -139,6 +140,8 @@ def parse_events(sock, loop_count=100):
                     measuredPower = struct.unpack("b", pkt[report_pkt_offset -1])
                     accuracy = math.pow(12.0, 1.5 * ( (txpower[0] / measuredPower[0]) -1 ))
                     timestamp = datetime.datetime.now()
+
+                    licznik += 1
 
                     #create a Report class object
                     raport = iBeaconReport()
@@ -172,6 +175,7 @@ def parse_events(sock, loop_count=100):
 
                 myFullList.append(Adstring)     #to be deleted
             done = True
+            print licznik
     sock.setsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, old_filter )
     return myFullList       #to be changed to Report array
 
