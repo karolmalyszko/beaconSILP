@@ -20,6 +20,8 @@ import sys
 import struct
 import bluetooth._bluetooth as bluez
 import math
+import Report
+import datetime
 
 LE_META_EVENT = 0x3e
 LE_PUBLIC_ADDRESS=0x00
@@ -136,8 +138,23 @@ def parse_events(sock, loop_count=100):
                     txpower = struct.unpack("b", pkt[report_pkt_offset -2])
                     measuredPower = struct.unpack("b", pkt[report_pkt_offset -1])
                     accuracy = math.pow(12.0, 1.5 * ( (txpower[0] / measuredPower[0]) -1 ))
+                    timestamp = datetime.datetime.now()
 
-                    # build the return string
+                    #create a Report class object
+                    raport = Report()
+                    raport.MACAddress = macAddress
+                    raport.UID = uid
+                    raport.Major = major
+                    raport.Minor = minor
+                    raport.TxPower = txpower
+                    raport.measuredPower = measuredPower
+                    raport.accuracy = accuracy
+                    raport.timestamp = timestamp
+
+                    #add new Report object to array
+                    results.append(raport)
+
+                    # build the return string   //to be deleted
                     Adstring = "\n MAC Address :: "
                     Adstring += macAddress
                     Adstring += "\n UID :: "
@@ -153,10 +170,9 @@ def parse_events(sock, loop_count=100):
                     Adstring += "\n Accuracy :: "
                     Adstring += "%f" % accuracy
 
-                #print "\tAdstring=", Adstring
-                myFullList.append(Adstring)
+                myFullList.append(Adstring)     #to be deleted
             done = True
     sock.setsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, old_filter )
-    return myFullList
+    return myFullList       #to be changed to Report array
 
 
