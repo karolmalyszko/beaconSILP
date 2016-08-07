@@ -141,7 +141,7 @@ def parse_events(sock, loop_count=100):
                     timestamp = datetime.datetime.now()
 
                     #create a Report class object
-                    raport = Report()
+                    raport = iBeaconReport()
                     raport.MACAddress = macAddress
                     raport.UID = uid
                     raport.Major = major
