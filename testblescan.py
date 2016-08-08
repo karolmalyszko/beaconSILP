@@ -38,5 +38,9 @@ for beacon in sortedReturnedList:
 #	print beacon.abbrToString()
 #	print beacon
 
+#distinct Major list
+lista = set(sortedReturnedList[2])
+print lista
+
 blescan.hci_disable_le_scan(sock)
 #print "Test completed"
