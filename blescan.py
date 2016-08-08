@@ -139,19 +139,21 @@ def parse_events(sock, loop_count=100):
                     accuracy = math.pow(12.0, 1.5 * ( (txpower[0] / measuredPower[0]) -1 ))
                     timestamp = datetime.datetime.now()
 
-                    #create an iBeaconReport class object
-                    raport = iBeaconReport()
-                    raport.MACAddress = macAddress
-                    raport.UID = uid
-                    raport.Major = major
-                    raport.Minor = minor
-                    raport.TxPower = txpower
-                    raport.measuredPower = measuredPower
-                    raport.accuracy = accuracy
-                    raport.timestamp = timestamp
+                    #wycinanie raportów o TxPower > 0
+                    if txpower < 0:
+                        #create an iBeaconReport class object
+                        raport = iBeaconReport()
+                        raport.MACAddress = macAddress
+                        raport.UID = uid
+                        raport.Major = major
+                        raport.Minor = minor
+                        raport.TxPower = txpower
+                        raport.measuredPower = measuredPower
+                        raport.accuracy = accuracy
+                        raport.timestamp = timestamp
 
-                    #add new Report object to array
-                    results.append(raport)
+                        #add new Report object to array
+                        results.append(raport)
 
             done = True
     sock.setsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, old_filter )
