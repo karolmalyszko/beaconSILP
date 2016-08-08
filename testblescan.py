@@ -41,7 +41,7 @@ for beacon in sortedReturnedList:
     macAddressList.add(beacon.MACAddress)
 
 #for macAddress in macAddressList:
-print macAddress
+print macAddressList
 
 #distinct Major list
 #lista = set(sortedReturnedList[2])
