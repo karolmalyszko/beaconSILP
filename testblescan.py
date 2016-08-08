@@ -31,7 +31,7 @@ beaconList = list()
 for beacon in returnedList:
     macAddressSet.add(beacon.MACAddress)
 
-beaconReport = iBeaconReport()
+#beaconReport = iBeaconReport()
 #usrednianie wartosci parametru measuredPower
 for macAddress in macAddressSet:
     measuredPowerSum = 0
@@ -44,9 +44,10 @@ for macAddress in macAddressSet:
     measuredPowerAverage = measuredPowerSum / iterator
 
     #for testing purposes
-    print math.pow(12.0, 1.5 * ( (beacon.TxPower[0] / measuredPowerAverage) -1 ))    
+    #print math.pow(12.0, 1.5 * ( (beacon.TxPower[0] / measuredPowerAverage) -1 ))    
 
     #output beacon parameters
+    beaconReport = iBeaconReport()
     beaconReport.MACAddress = macAddress
     beaconReport.UID = beacon.UID
     beaconReport.Major = beacon.Major
@@ -56,14 +57,14 @@ for macAddress in macAddressSet:
     beaconReport.accuracy = math.pow(12.0, 1.5 * ( (beaconReport.TxPower / beaconReport.measuredPower) -1 ))
     beaconReport.timestamp = datetime.datetime.now()
 
-    #beaconList.append(beaconReport)
+    beaconList.append(beaconReport)
 
     #for testing purposes
     print "MAC address :: " + macAddress + ", measured power sum :: %i" % measuredPowerSum + ", iterator %i" % iterator + ", average measured power :: %i" % measuredPowerAverage
     print beaconReport.toString()
-
+    print "============================================"
 blescan.hci_disable_le_scan(sock)
 
 #for testing purposes
-#for ibeacon in beaconList:
-#    print ibeacon.toString()
+for ibeacon in beaconList:
+    print ibeacon.toString()
