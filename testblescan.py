@@ -44,16 +44,16 @@ for macAddress in macAddressSet:
     measuredPowerAverage = measuredPowerSum / iterator
 
     #for testing purposes
-    print math.pow(12.0, 1.5 * ( (beacon.TxPower[0] / beacon.measuredPower) -1 ))    
+    print math.pow(12.0, 1.5 * ( (beacon.TxPower[0] / measuredPowerAverage) -1 ))    
 
     #output beacon parameters
     beaconReport.MACAddress = macAddress
     beaconReport.UID = beacon.UID
     beaconReport.Major = beacon.Major
     beaconReport.Minor = beacon.Minor
-    beaconReport.TxPower = beacon.TxPower
+    beaconReport.TxPower = beacon.TxPower[0]
     beaconReport.measuredPower = measuredPowerAverage
-    beaconReport.accuracy = math.pow(12.0, 1.5 * ( (beacon.TxPower[0] / beacon.measuredPower) -1 ))
+    beaconReport.accuracy = math.pow(12.0, 1.5 * ( (beacon.TxPower / beacon.measuredPower) -1 ))
     beaconReport.timestamp = datetime.datetime.now()
 
     beaconList.append(beaconReport)
