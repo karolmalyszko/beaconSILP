@@ -47,4 +47,4 @@ class iBeaconReport:
     def __repr__(self):
 #        return '{} {} {} {}'.format(self.MACAddress, self.Major, self.Minor, self.timestamp)
 #        return '{} {} {} {}'.format(self.MACAddress, self.UID, self.Minor, self.timestamp)
-        return '{} {} {} {} {}'.format(self.MACAddress, self.UID, self.Major, self.Minor, self.timestamp)
+        return "['{}', '{}', '{}', '{}', '{}', '{}', '{}']".format(self.MACAddress, self.UID, self.Major, self.Minor, self.TxPower, self.measuredPower, self.timestamp)
