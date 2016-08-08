@@ -34,13 +34,13 @@ print "after sort"
 #sortowanie wynikow po major i minor
 sortedReturnedList = sorted(returnedList)
 for beacon in sortedReturnedList:
-	print beacon.toString()
+#	print beacon.toString()
 #	print beacon.abbrToString()
-#	print beacon
+	print beacon
 
 #distinct Major list
-lista = set(sortedReturnedList[2])
-print lista
+#lista = set(sortedReturnedList[2])
+#print lista
 
 blescan.hci_disable_le_scan(sock)
 #print "Test completed"
