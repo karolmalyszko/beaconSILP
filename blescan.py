@@ -139,7 +139,7 @@ def parse_events(sock, loop_count=100):
                     accuracy = math.pow(12.0, 1.5 * ( (txpower[0] / measuredPower[0]) -1 ))
                     timestamp = datetime.datetime.now()
 
-                    #wycinanie raportów o TxPower > 0
+                    #wycinanie raportow o TxPower > 0
                     if txpower < 0:
                         #create an iBeaconReport class object
                         raport = iBeaconReport()
