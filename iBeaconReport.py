@@ -45,4 +45,5 @@ class iBeaconReport:
             return self.Major.__cmp__(other.Major)
 
     def __repr__(self):
-        return '{} {} {} {}'.format(self.MACAddress, self.Major, self.Minor, self.timestamp)
+#        return '{} {} {} {}'.format(self.MACAddress, self.Major, self.Minor, self.timestamp)
+        return '{} {} {} {}'.format(self.MACAddress, self.UID, self.Minor, self.timestamp)
