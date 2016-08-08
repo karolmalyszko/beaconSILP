@@ -21,6 +21,8 @@ blescan.hci_enable_le_scan(sock)
 #uruchomienie skanera; jeden cykl, zebranie 100 advertising reports
 returnedList = blescan.parse_events(sock)
 
+print len(returnedList)
+
 #oryginalna lista wynikow
 for beacon in returnedList:
 #	print beacon.abbrToString()
