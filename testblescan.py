@@ -6,9 +6,6 @@ import sys
 from iBeaconReport import iBeaconReport
 import bluetooth._bluetooth as bluez
 
-def getKey(item):
-    return item[2]
-
 dev_id = 0
 try:
 	sock = bluez.hci_open_dev(dev_id)

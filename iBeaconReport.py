@@ -39,3 +39,6 @@ class iBeaconReport:
         Adstring += "\n Timestamp :: "
         Adstring += self.timestamp.strftime("%d-%m-%Y %H:%M:%S")
         return Adstring
+
+    def getKey(self):
+        return self.Major
