@@ -29,7 +29,7 @@ for beacon in returnedList:
 print "after sort"
 
 #sortowanie wynikow po major i minor
-sortedReturnedList = sorted(returnedList, key=getKey)
+sortedReturnedList = sorted(returnedList)
 for beacon in sortedReturnedList:
 #	print beacon.abbrToString()
 	print beacon
