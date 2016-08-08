@@ -23,12 +23,16 @@ returnedList = blescan.parse_events(sock)
 
 #oryginalna lista wynikow
 for beacon in returnedList:
-	print beacon.abbrToString()
+#	print beacon.abbrToString()
+	print beacon
+
+print "after sort"
 
 #sortowanie wynikow po major i minor
 sortedReturnedList = sorted(returnedList, key=getKey)
 for beacon in sortedReturnedList:
-	print beacon.abbrToString()
+#	print beacon.abbrToString()
+	print beacon
 
 blescan.hci_disable_le_scan(sock)
 #print "Test completed"

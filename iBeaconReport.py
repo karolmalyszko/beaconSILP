@@ -42,3 +42,10 @@ class iBeaconReport:
 
     def getKey(self):
         return self.Major
+
+    def __cmp__(self, other):
+        if hasattr(other, Major):
+            return self.Major.__cmp__(other, Major)
+
+    def __repr__(self):
+        return '{} {} {}'.format(self.MACAddress, self.Major, self.timestamp)
