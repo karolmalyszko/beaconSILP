@@ -21,15 +21,15 @@ blescan.hci_enable_le_scan(sock)
 #uruchomienie skanera; jeden cykl, zebranie 100 advertising reports
 returnedList = blescan.parse_events(sock)
 
-print len(returnedList)
+#print len(returnedList)
 
 #oryginalna lista wynikow
-for beacon in returnedList:
+#for beacon in returnedList:
 #	print beacon.abbrToString()
-	print beacon.toString()
+#	print beacon.toString()
 #	print beacon
 
-print "after sort"
+#print "after sort"
 
 #sortowanie wynikow po major i minor
 sortedReturnedList = sorted(returnedList)
