@@ -1,38 +1,37 @@
 from __future__ import division
-# test BLE Scanning software
-# jcs 6/8/2014
+# Standalone script for ranging iBeacons with Raspberry Pi 3
+# Karol.Malyszko@torneo.eu 8/8/2016
 
-import blescan
+import BLEscanner
 import sys
 from iBeaconReport import iBeaconReport
 import bluetooth._bluetooth as bluez
 import math
 import datetime
 
+# Initialize the device
 dev_id = 0
 try:
 	sock = bluez.hci_open_dev(dev_id)
-	#print "ble thread started"
-
 except:
-	print "error accessing bluetooth device..."
+	print "Error accessing bluetooth device. Aborting."
         sys.exit(1)
 
-blescan.hci_le_set_scan_parameters(sock)
-blescan.hci_enable_le_scan(sock)
+# Set scan parameters and enable scan mode
+BLEscanner.hci_le_set_scan_parameters(sock)
+BLEscanner.hci_enable_le_scan(sock)
 
-#uruchomienie skanera; jeden cykl, zebranie 100 advertising reports
-returnedList = blescan.parse_events(sock)
+# Initiate one scan -> gather 100 advertisement reports from iBeacons in range
+returnedList = BLEscanner.parse_events(sock)
 
-#budowanie listy kamieni (rozroznianie po MAC adresie)
 macAddressSet = set()
 beaconList = list()
 
+# Build set of distinct iBeacons -> select by MAC address; Assume each iBeacon has distinct MAC address; if not, use third-party software to set different MAC addresses for each one
 for beacon in returnedList:
     macAddressSet.add(beacon.MACAddress)
 
-#beaconReport = iBeaconReport()
-#usrednianie wartosci parametru measuredPower
+# Calculate average 'measuredPower' from multiple reports for each iBeacon
 for macAddress in macAddressSet:
     measuredPowerSum = 0
     measuredPowerAverage = 0
@@ -42,9 +41,6 @@ for macAddress in macAddressSet:
             measuredPowerSum += beacon.measuredPower[0]
             iterator = iterator + 1
     measuredPowerAverage = measuredPowerSum / iterator
-
-    #for testing purposes
-    #print math.pow(12.0, 1.5 * ( (beacon.TxPower[0] / measuredPowerAverage) -1 ))    
 
     #output beacon parameters
     beaconReport = iBeaconReport()
@@ -59,12 +55,11 @@ for macAddress in macAddressSet:
 
     beaconList.append(beaconReport)
 
-    #for testing purposes
-    print "MAC address :: " + macAddress + ", measured power sum :: %i" % measuredPowerSum + ", iterator %i" % iterator + ", average measured power :: %i" % measuredPowerAverage
-    print beaconReport.toString()
-    print "============================================"
-blescan.hci_disable_le_scan(sock)
+# Disable scanner
+BLEscanner.hci_disable_le_scan(sock)
 
-#for testing purposes
+# Script completed
+
+# For testing purposes
 for ibeacon in beaconList:
     print ibeacon.toString()

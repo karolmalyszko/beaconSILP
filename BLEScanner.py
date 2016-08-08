@@ -111,7 +111,6 @@ def parse_events(sock, loop_count=100):
     for i in range(0, loop_count):
         pkt = sock.recv(255)
         ptype, event, plen = struct.unpack("BBB", pkt[:3])
-        #print "--------------" 
         if event == bluez.EVT_INQUIRY_RESULT_WITH_RSSI:
                 i =0
         elif event == bluez.EVT_NUM_COMP_PKTS:
@@ -124,7 +123,6 @@ def parse_events(sock, loop_count=100):
             if subevent == EVT_LE_CONN_COMPLETE:
                 le_handle_connection_complete(pkt)
             elif subevent == EVT_LE_ADVERTISING_REPORT:
-                #print "advertising report"
                 num_reports = struct.unpack("B", pkt[0])[0]
                 report_pkt_offset = 0
 
@@ -136,14 +134,10 @@ def parse_events(sock, loop_count=100):
                     minor = returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2])
                     txpower = struct.unpack("b", pkt[report_pkt_offset -2])
                     measuredPower = struct.unpack("b", pkt[report_pkt_offset -1])
-                    accuracy = math.pow(12.0, 1.5 * ( (txpower[0] / measuredPower[0]) -1 ))
                     timestamp = datetime.datetime.now()
 
-                    #wycinanie raportow o TxPower > 0
+                    # Clean results from any reports with TxPower > 0 (probably Apple somewhere around)
                     if txpower[0] < 0:
-                        #licznik += 1
-                        #print licznik
-                        #create an iBeaconReport class object
                         raport = iBeaconReport()
                         raport.MACAddress = macAddress
                         raport.UID = uid
@@ -151,10 +145,9 @@ def parse_events(sock, loop_count=100):
                         raport.Minor = minor
                         raport.TxPower = txpower
                         raport.measuredPower = measuredPower
-                        raport.accuracy = accuracy
                         raport.timestamp = timestamp
 
-                        #add new Report object to array
+                        # Add new iBeaconReport object to array
                         results.append(raport)
 
             done = True

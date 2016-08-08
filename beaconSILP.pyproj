@@ -23,13 +23,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="beaconSILP.py" />
-    <Compile Include="blescan.py">
+    <Compile Include="BLEScanner.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="iBeaconReport.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="testblescan.py">
+    <Compile Include="test.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

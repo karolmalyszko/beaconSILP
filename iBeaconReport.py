@@ -1,4 +1,3 @@
-from __future__ import division
 class iBeaconReport:
     """Basic location report, designed to hold data from single iBeacon advertisement event"""
 
@@ -45,10 +44,5 @@ class iBeaconReport:
         if hasattr(other, 'Major'):
             return self.Major.__cmp__(other.Major)
 
-    def __repr__(self):
-#        return '{} {} {} {}'.format(self.MACAddress, self.Major, self.Minor, self.timestamp)
-#        return '{} {} {} {}'.format(self.MACAddress, self.UID, self.Minor, self.timestamp)
+    def __repr__(self):     # for testing purposes for easier debugging
         return "['{}', '{}', '{}', '{}', '{}', '{}', '{}']".format(self.MACAddress, self.UID, self.Major, self.Minor, self.TxPower[0], self.measuredPower[0], self.timestamp)
-
-#    def setAccuracy():
-#        self.accuracy = math.pow(12.0, 1.5 * ( (self.TxPower[0] / self.measuredPower[0]) -1 ))
