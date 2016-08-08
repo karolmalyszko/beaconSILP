@@ -6,10 +6,13 @@ import sys
 from iBeaconReport import iBeaconReport
 import bluetooth._bluetooth as bluez
 
+def getKey(item):
+    return item[2]
+
 dev_id = 0
 try:
 	sock = bluez.hci_open_dev(dev_id)
-	print "ble thread started"
+	#print "ble thread started"
 
 except:
 	print "error accessing bluetooth device..."
@@ -20,9 +23,15 @@ blescan.hci_enable_le_scan(sock)
 
 #while True:
 returnedList = blescan.parse_events(sock)
-print "----------"
+
+#oryginalna lista wyników
 for beacon in returnedList:
-	print beacon.toString()
+	print beacon.abbrToString()
+
+#sortowanie wyników po major i minor
+sortedReturnedList = sorted(returnedList, key=getKey)
+for beacon in sortedReturnedList:
+	print beacon.abbrToString()
 
 blescan.hci_disable_le_scan(sock)
-print "Test completed"
+#print "Test completed"

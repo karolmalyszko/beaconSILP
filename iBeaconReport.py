@@ -30,3 +30,12 @@ class iBeaconReport:
         Adstring += self.timestamp.strftime("%d-%m-%Y %H:%M:%S")
         
         return Adstring
+
+    def abbrToString(self):
+        Adstring = "\n MAC Address :: "
+        Adstring += self.MACAddress
+        Adstring += "\n Accuracy :: "
+        Adstring += "%f" % self.accuracy
+        Adstring += "\n Timestamp :: "
+        Adstring += self.timestamp.strftime("%d-%m-%Y %H:%M:%S")
+        return Adstring
