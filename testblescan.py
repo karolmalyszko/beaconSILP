@@ -38,10 +38,10 @@ for beacon in sortedReturnedList:
 #	print beacon.toString()
 #	print beacon.abbrToString()
 #	print beacon
-    macAddressList.add(beacon[0])
+    macAddressList.add(beacon.MACAddress)
 
-for macAddress in macAddressList:
-    print macAddress
+#for macAddress in macAddressList:
+print macAddress
 
 #distinct Major list
 #lista = set(sortedReturnedList[2])
