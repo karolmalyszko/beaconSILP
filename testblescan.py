@@ -32,7 +32,7 @@ for macAddress in macAddressSet:
     measuredPowerAverage = 0
     iterator = 0
     for beacon in returnedList:
-        if beacon.MACAddress == macAddress
+        if beacon.MACAddress == macAddress:
             measuredPowerSum += beacon.measuredPower[0]
             iterator = iterator + 1
     measuredPowerAverage = measuredPowerSum / iterator
