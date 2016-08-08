@@ -32,11 +32,16 @@ returnedList = blescan.parse_events(sock)
 #print "after sort"
 
 #sortowanie wynikow po major i minor
+macAddressList = set()
 sortedReturnedList = sorted(returnedList)
 for beacon in sortedReturnedList:
 #	print beacon.toString()
 #	print beacon.abbrToString()
-	print beacon
+#	print beacon
+    macAddressList.add(beacon[0])
+
+for macAddress in macAddressList:
+    print macAddress
 
 #distinct Major list
 #lista = set(sortedReturnedList[2])
