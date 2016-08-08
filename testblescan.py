@@ -38,6 +38,6 @@ for macAddress in macAddressSet:
     measuredPowerAverage = measuredPowerSum / iterator
     
     #for testing purposes
-    print macAddress + "%i" % measuredPowerAverage
+    print "MAC address :: " + macAddress + ", measured power sum :: %i" % measuredPowerSum + ", iterator %i" % iterator + ", average measured power :: %i" % measuredPowerAverage
 
 blescan.hci_disable_le_scan(sock)
