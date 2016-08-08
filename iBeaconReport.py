@@ -27,6 +27,6 @@ class iBeaconReport:
         Adstring += "\n Accuracy :: "
         Adstring += "%f" % self.accuracy
         Adstring += "\n Timestamp :: "
-        Adstring += "%i" % self.timestamp
+        Adstring += time.strftime("%D %H:%M", self.timestamp)
         
         return Adstring
