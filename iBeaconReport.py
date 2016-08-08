@@ -1,3 +1,4 @@
+from __future__ import division
 class iBeaconReport:
     """Basic location report, designed to hold data from single iBeacon advertisement event"""
 
@@ -48,3 +49,6 @@ class iBeaconReport:
 #        return '{} {} {} {}'.format(self.MACAddress, self.Major, self.Minor, self.timestamp)
 #        return '{} {} {} {}'.format(self.MACAddress, self.UID, self.Minor, self.timestamp)
         return "['{}', '{}', '{}', '{}', '{}', '{}', '{}']".format(self.MACAddress, self.UID, self.Major, self.Minor, self.TxPower[0], self.measuredPower[0], self.timestamp)
+
+    def setAccuracy( TxPower, MeasuredPower ):  #wymagane podanie zmiennych typu Int
+        accuracy = math.pow(12.0, 1.5 * ( (txpower / measuredPower) -1 ))
