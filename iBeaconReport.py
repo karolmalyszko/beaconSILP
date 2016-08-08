@@ -44,7 +44,7 @@ class iBeaconReport:
         return self.Major
 
     def __cmp__(self, other):
-        if hasattr(other, Major):
+        if hasattr(other, 'Major'):
             return self.Major.__cmp__(other.Major)
 
     def __repr__(self):
