@@ -21,31 +21,23 @@ blescan.hci_enable_le_scan(sock)
 #uruchomienie skanera; jeden cykl, zebranie 100 advertising reports
 returnedList = blescan.parse_events(sock)
 
-#print len(returnedList)
+#budowanie listy kamieni (rozroznianie po MAC adresie)
+macAddressSet = set()
+for beacon in returnedList:
+    macAddressSet.add(beacon.MACAddress)
 
-#oryginalna lista wynikow
-#for beacon in returnedList:
-#	print beacon.abbrToString()
-#	print beacon.toString()
-#	print beacon
-
-#print "after sort"
-
-#sortowanie wynikow po major i minor
-macAddressList = set()
-sortedReturnedList = sorted(returnedList)
-for beacon in sortedReturnedList:
-#	print beacon.toString()
-#	print beacon.abbrToString()
-#	print beacon
-    macAddressList.add(beacon.MACAddress)
-
-#for macAddress in macAddressList:
-print macAddressList
-
-#distinct Major list
-#lista = set(sortedReturnedList[2])
-#print lista
+#usrednianie wartosci parametru measuredPower
+for macAddress in macAddressSet:
+    measuredPowerSum = 0
+    measuredPowerAverage = 0
+    iterator = 0
+    for beacon in returnedList:
+        if beacon.MACAddress == macAddress
+            measuredPowerSum += beacon.measuredPower[0]
+            iterator = iterator + 1
+    measuredPowerAverage = measuredPowerSum / iterator
+    
+    #for testing purposes
+    print macAddress + "%i" % measuredPowerAverage
 
 blescan.hci_disable_le_scan(sock)
-#print "Test completed"
