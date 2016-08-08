@@ -1,3 +1,4 @@
+from __future__ import division
 # test BLE Scanning software
 # jcs 6/8/2014
 
@@ -41,7 +42,10 @@ for macAddress in macAddressSet:
             measuredPowerSum += beacon.measuredPower[0]
             iterator = iterator + 1
     measuredPowerAverage = measuredPowerSum / iterator
-    
+
+    #for testing purposes
+    print math.pow(12.0, 1.5 * ( (beacon.TxPower[0] / beacon.measuredPower) -1 ))    
+
     #output beacon parameters
     beaconReport.MACAddress = macAddress
     beaconReport.UID = beacon.UID
@@ -49,7 +53,7 @@ for macAddress in macAddressSet:
     beaconReport.Minor = beacon.Minor
     beaconReport.TxPower = beacon.TxPower
     beaconReport.measuredPower = measuredPowerAverage
-    beaconReport.setAccuracy()
+    beaconReport.accuracy = math.pow(12.0, 1.5 * ( (beacon.TxPower[0] / beacon.measuredPower) -1 ))
     beaconReport.timestamp = datetime.datetime.now()
 
     beaconList.append(beaconReport)
