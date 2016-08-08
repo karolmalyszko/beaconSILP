@@ -50,5 +50,5 @@ class iBeaconReport:
 #        return '{} {} {} {}'.format(self.MACAddress, self.UID, self.Minor, self.timestamp)
         return "['{}', '{}', '{}', '{}', '{}', '{}', '{}']".format(self.MACAddress, self.UID, self.Major, self.Minor, self.TxPower[0], self.measuredPower[0], self.timestamp)
 
-    def setAccuracy( TxPower, MeasuredPower ):  #wymagane podanie zmiennych typu Int
-        accuracy = math.pow(12.0, 1.5 * ( (txpower / measuredPower) -1 ))
+    def setAccuracy( txpower, MeasuredPower ):  #wymagane podanie zmiennych typu Int
+        accuracy = math.pow(12.0, 1.5 * ( (txpower / MeasuredPower) -1 ))
