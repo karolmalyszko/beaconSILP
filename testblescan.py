@@ -49,7 +49,7 @@ for macAddress in macAddressSet:
     beaconReport.Minor = beacon.Minor
     beaconReport.TxPower = beacon.TxPower
     beaconReport.measuredPower = measuredPowerAverage
-    beaconReport.setAccuracy(beacon.TxPower[0], measuredPowerAverage)
+    beaconReport.setAccuracy()
     beaconReport.timestamp = datetime.datetime.now()
 
     beaconList.append(beaconReport)
