@@ -1,10 +1,7 @@
 from __future__ import division
 # BLE iBeaconScanner based on https://github.com/adamf/BLE/blob/master/ble-scanner.py
 # JCS 06/07/14
-
-DEBUG = False
 # BLE scanner, based on https://code.google.com/p/pybluez/source/browse/trunk/examples/advanced/inquiry-with-rssi.py
-
 # https://github.com/pauloborges/bluez/blob/master/tools/hcitool.c for lescan
 # https://kernel.googlesource.com/pub/scm/bluetooth/bluez/+/5.6/lib/hci.h for opcodes
 # https://github.com/pauloborges/bluez/blob/master/lib/hci.c#L2782 for functions used by lescan
