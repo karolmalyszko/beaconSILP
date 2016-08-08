@@ -2,7 +2,7 @@ from __future__ import division
 # Standalone script for ranging iBeacons with Raspberry Pi 3
 # Karol.Malyszko@torneo.eu 8/8/2016
 
-import BLEscanner
+import BLEScanner
 import sys
 from iBeaconReport import iBeaconReport
 import bluetooth._bluetooth as bluez
@@ -18,11 +18,11 @@ except:
         sys.exit(1)
 
 # Set scan parameters and enable scan mode
-BLEscanner.hci_le_set_scan_parameters(sock)
-BLEscanner.hci_enable_le_scan(sock)
+BLEScanner.hci_le_set_scan_parameters(sock)
+BLEScanner.hci_enable_le_scan(sock)
 
 # Initiate one scan -> gather 100 advertisement reports from iBeacons in range
-returnedList = BLEscanner.parse_events(sock)
+returnedList = BLEScanner.parse_events(sock)
 
 macAddressSet = set()
 beaconList = list()
@@ -56,7 +56,7 @@ for macAddress in macAddressSet:
     beaconList.append(beaconReport)
 
 # Disable scanner
-BLEscanner.hci_disable_le_scan(sock)
+BLEScanner.hci_disable_le_scan(sock)
 
 # Script completed
 
