@@ -107,7 +107,7 @@ def parse_events(sock, loop_count=100):
     done = False
     results = []    #iBeaconReport object array
     myFullList = []
-   # licznik = 0
+    licznik = 0
     for i in range(0, loop_count):
         pkt = sock.recv(255)
         ptype, event, plen = struct.unpack("BBB", pkt[:3])
@@ -141,6 +141,8 @@ def parse_events(sock, loop_count=100):
 
                     #wycinanie raportow o TxPower > 0
                     if txpower < 0:
+                        licznik += 1
+                        print licznik
                         #create an iBeaconReport class object
                         raport = iBeaconReport()
                         raport.MACAddress = macAddress
