@@ -3,7 +3,7 @@
 
 import blescan
 import sys
-
+from iBeaconReport import iBeaconReport
 import bluetooth._bluetooth as bluez
 
 dev_id = 0
@@ -22,7 +22,7 @@ blescan.hci_enable_le_scan(sock)
 returnedList = blescan.parse_events(sock)
 print "----------"
 for beacon in returnedList:
-	print beacon
+	print beacon.toString()
 
 blescan.hci_disable_le_scan(sock)
 print "Test completed"
