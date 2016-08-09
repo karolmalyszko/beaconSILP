@@ -46,7 +46,7 @@ class iBeaconReport:
             return self.Major.__cmp__(other.Major)
 
     def __repr__(self):     # for testing purposes for easier debugging
-        return "['{}', '{}', '{}', '{}', '{}', '{}', '{}']".format(self.MACAddress, self.UID, self.Major, self.Minor, self.TxPower[0], self.measuredPower[0], self.timestamp)
+        return "{}, {}, {}, {}, {}, {}, {}".format(self.MACAddress, self.UID, self.Major, self.Minor, self.TxPower[0], self.measuredPower[0], self.timestamp)
 
     def setDistanceFriis(self):
         self.accuracy =  math.pow(2, (self.TxPower - self.measuredPower) / 6 )
